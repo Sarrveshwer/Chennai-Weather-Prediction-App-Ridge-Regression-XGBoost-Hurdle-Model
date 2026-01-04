@@ -46,6 +46,7 @@ def venv_install() -> None:
 
 
 def pip_install() -> None:
+    print("Attempting to install to all libraries please wait it is not stuck........")
     try:
         result = sub.run(
         "pip install -r requirements.txt",
