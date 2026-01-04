@@ -2,18 +2,20 @@ import subprocess as sub
 import os
 import venv
 import sys
+from subprocess import Popen, PIPE, STDOUT
+from time import sleep
 
 
 def venv_install() -> None:
     venv_dir_name = ".venv"
     venv_dir = os.path.abspath(venv_dir_name)
-
-    print(f"Attempting to create virtual environment in: {venv_dir}")
+    print
+    print(f"\033[34mAttempting to create virtual environment in: {venv_dir}")
 
     try:
         # Create the virtual environment
         venv.create(venv_dir, with_pip=True, clear=True, symlinks=False) # symlinks=False for better Windows compatibility
-        print(f"Successfully created virtual environment: {venv_dir_name}")
+        print(f"\033[32mSuccessfully created virtual environment: {venv_dir_name}")
 
         # Activate the virtual environment
         if sys.platform == "win32":
@@ -43,21 +45,29 @@ def venv_install() -> None:
         sys.exit(1)
 
     print("Script finished.")
+    sleep(3)
 
 
 def pip_install() -> None:
-    print("Attempting to install to all libraries please wait it is not stuck........")
+    
+    print(f"\n\nAttempting to install to all required libraries in",end=' ')
+    for i in range(3,0,-1):
+        print(str(i),end='',flush=True)
+        sleep(0.5)
+        print(' . ',end='',flush=True)
+        sleep(0.5)
+    print()
     try:
-        result = sub.run(
-        "pip install -r requirements.txt",
-        capture_output=True,
-        text=True,
-        shell=True
-        )
-        if not result.stdout:
-            print("Not found")
+        cmd = ["pip", "install" ,"-r", "requirements.txt"]
+
+        with Popen(cmd, stdout=PIPE, stderr=STDOUT, bufsize=1, universal_newlines=True) as p:
+            for line in p.stdout:
+                print("\033[34m",line, end='')
+
+        if p.returncode != 0:
+            raise sub.CalledProcessError(p.returncode, p.args)
         else:
-            print(result.stdout)
+            print("\033[32mInstallation succesfull!\033[0m")
     except Exception as e:
         print(e)    
 
