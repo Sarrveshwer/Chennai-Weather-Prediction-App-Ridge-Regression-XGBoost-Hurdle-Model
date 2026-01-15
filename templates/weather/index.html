@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chennai Weather AI - Frosted Glass</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+    <div class="background-gradient"></div>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar glass">
+            <div class="sidebar-content">
+                <div class="logo-section">
+                    <h1 class="logo">Weather AI</h1>
+                    <p class="tagline">Intelligent Forecasting</p>
+                </div>
+
+                <div class="status-section">
+                    <div class="status-indicator">
+                        <span class="status-dot {% if status == 'online' %}online{% else %}offline{% endif %}"></span>
+                        <span class="status-text">{% if status == 'online' %}ENGINE READY{% else %}SYSTEM OFFLINE{% endif %}</span>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="info-section">
+                    <h3 class="info-title">FORECAST SETTINGS</h3>
+                    <p class="info-text">Powered by advanced ML algorithms trained on historical weather patterns for
+                        accurate predictions.</p>
+                </div>
+
+                <div class="days-selector">
+                    <label class="days-label">PREDICTION DAYS</label>
+                    <select class="days-input glass" id="daysSelector">
+                        <option value="3">3 Days</option>
+                        <option value="5">5 Days</option>
+                        <option value="7" selected>7 Days</option>
+                        <option value="10">10 Days</option>
+                        <option value="14">14 Days</option>
+                    </select>
+                </div>
+
+                <div class="spacer"></div>
+
+                <div class="progress-section" id="progressSection" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+
+                <button class="btn-generate glass-btn" id="generateBtn">
+                    <span class="btn-text">Generate Forecast</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- Current Conditions -->
+                <section class="current-section">
+                    <h2 class="section-title">Current Conditions</h2>
+
+                    <div class="metrics-grid">
+                        <!-- Temperature Card -->
+                        <div class="metric-card glass">
+                            <div class="metric-header">
+                                <span class="metric-label">TEMPERATURE</span>
+                            </div>
+                            <div class="metric-body">
+                                <div class="metric-icon">🌡️</div>
+                                <div class="metric-value">
+                                    <span class="value" id="currentTemp">{% if current_temp %}{{ current_temp|floatformat:"1" }}{% else %}--{% endif %}</span>
+                                    <span class="unit">°C</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Precipitation Card -->
+                        <div class="metric-card glass">
+                            <div class="metric-header">
+                                <span class="metric-label">PRECIPITATION</span>
+                            </div>
+                            <div class="metric-body">
+                                <div class="metric-icon">💧</div>
+                                <div class="metric-value">
+                                    <span class="value" id="currentPrecip">{% if current_precip %}{{ current_precip|floatformat:"1" }}{% else %}--{% endif %}</span>
+                                    <span class="unit">mm</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- IMD Alerts Section -->
+                <section class="alerts-section">
+                    <h2 class="section-title">Weather Alerts</h2>
+
+                    <div class="alerts-container" id="alertsContainer">
+                        <div class="no-alerts">
+                            <p>No active weather alerts for Chennai</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Forecast Section -->
+                <section class="forecast-section">
+                    <h2 class="section-title" id="forecastTitle">7-Day Forecast</h2>
+
+                    <div class="forecast-container" id="forecastContainer">
+                        <div class="empty-state">
+                            <p>Click "Generate Forecast" to see predictions</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+
+</html>
