@@ -194,6 +194,7 @@ Correlation matrix of the top 15 features to check for multicollinearity.
 
 The Django app provides a simple interface:
 
+![Web Page](graphs/image.png)
 **Main Page:**
 * Shows current temperature and precipitation
 * Engine status indicator (online/offline)
