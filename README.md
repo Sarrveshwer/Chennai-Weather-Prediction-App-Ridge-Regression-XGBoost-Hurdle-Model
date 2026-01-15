@@ -15,7 +15,7 @@ The system uses Ridge Regression (with L2 regularization, alpha=50) for temperat
 ```bash
 # Clone repository
 git clone https://github.com/Sarrveshwer/Chennai-Weather-Prediction-App-Ridge-Regression-XGBoost-Hurdle-Model.git
-cd Weather-prediction-app-Why-Why-Not-
+cd Chennai-Weather-Prediction-App-Ridge-Regression-XGBoost-Hurdle-Model
 
 # Run the app (installs dependencies, trains model if needed, starts server)
 python main.py
