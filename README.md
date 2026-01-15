@@ -17,10 +17,6 @@ The system uses Ridge Regression (with L2 regularization, alpha=50) for temperat
 git clone https://github.com/yourusername/Weather-prediction-app-Why-Why-Not-.git
 cd Weather-prediction-app-Why-Why-Not-
 
-# Create and activate virtual environment
-python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
-
 # Run the app (installs dependencies, trains model if needed, starts server)
 python main.py
 ```
